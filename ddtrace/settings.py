@@ -1,4 +1,9 @@
+import logging
+
 from .pin import Pin
+
+
+log = logging.getLogger(__name__)
 
 
 class ConfigException(Exception):
@@ -34,6 +39,7 @@ class Config(object):
         """
         pin = Pin.get_from(obj)
         if pin is None:
+            log.debug('No configuration found for %s', obj)
             return {}
 
         return pin._config
